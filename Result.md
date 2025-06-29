@@ -18,3 +18,6 @@
 
 ### BatchSize
 <img src="src/main/resources/static/Batch.png">
+
+### DTO Projection - `findMembers()`
+<img src="src/main/resources/static/dto.png">

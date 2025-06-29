@@ -69,7 +69,8 @@ SELECT * FROM comment WHERE post_id = 3;
         - 모든 LAZY 연관관계에 적용됨.
     - Batch Size를 너무 크게 설정하면, 한 번에 로드되는 데이터 양이 많아져서 메모리 사용량이 증가할 수 있다.
 
-4. 일반 join후 Projection하여 특정 컬럼만 Dto로 조회
+4. ### **_일반 join후 Projection하여 특정 컬럼만 Dto로 조회_**
+    - querydsl을 이용할 수도 있음.
 
 ### fetch join과 EntityGraph는 공통적으로 카테시안 곱(Cartesian Product)이 발생 하여 중복이 생길 수 있다.
 - 카테시안 곱 : 두 테이블 사이에 유효 join 조건을 적지 않았을 때 해당 테이블에 대한 모든 데이터를 전부 결합하여 테이블에 존재하는 행 갯수를 곱한만큼의 결과 값이 반환되는 것

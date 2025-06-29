@@ -31,7 +31,7 @@ public class NpulsOneService {
         member.registerTeam(team);
     }
 
-    // N + 1 상황 발생
+    // N + 1 상황 발생 (현재 배치 사이즈 적용해서 해결 완료)
     public List<Member> findAllMember() {
         List<Member> members = memberRepository.findAll();
 
@@ -52,6 +52,12 @@ public class NpulsOneService {
         List<Member> members = memberRepository.findAllEntityGraph();
 
         printTeamNameOfMember(members);
+    }
+
+    // N + 1 해결 - DTO projection
+    public void findMembers() {
+        List<MemberTeamResponse> responses = memberRepository.findMembers();
+        responses.forEach(response -> System.out.println(response.memberName()));
     }
 
     private void printTeamNameOfMember(List<Member> members) {

@@ -81,7 +81,6 @@ record NpulsOneServiceTest(NpulsOneService npulsOneService, MemberRepository mem
         entityManager.clear();
 
         npulsOneService.findAllByFetchJoin();
-
     }
 
     @DisplayName("N+1 해결 by EntityGraph")
@@ -93,7 +92,17 @@ record NpulsOneServiceTest(NpulsOneService npulsOneService, MemberRepository mem
         entityManager.clear();
 
         npulsOneService.findAllByEntityGraph();
+    }
 
+    @DisplayName("N+1 해결 by EntityGraph")
+    @Test
+    void findMembers() {
+        extracted();
+
+        entityManager.flush();
+        entityManager.clear();
+
+        npulsOneService.findMembers();
     }
 
 
