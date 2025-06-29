@@ -18,6 +18,7 @@ spring:
         format_sql: true
         show-sql: true
         dialect: org.hibernate.dialect.H2Dialect
+        default_batch_fetch_size: 10
 logging:
   level:
     org.hibernate.SQL: debug

@@ -15,3 +15,6 @@
 
 ### EntityGraph - `findAllByEntityGraph()`
 <img src="src/main/resources/static/entitygraph.png">
+
+### BatchSize
+<img src="src/main/resources/static/Batch.png">
