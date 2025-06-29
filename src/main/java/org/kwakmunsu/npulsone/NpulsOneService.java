@@ -25,9 +25,7 @@ public class NpulsOneService {
     public void registerTeam(Long memberId, Team team) {
         Optional<Member> optionalMember = memberRepository.findById(memberId);
 
-        if (optionalMember.isEmpty()) {
-            throw new IllegalArgumentException(String.format("Member with id %d does not exist", memberId));
-        }
+        checkExistMember(memberId, optionalMember);
 
         Member member = optionalMember.get();
         member.registerTeam(team);
@@ -42,16 +40,28 @@ public class NpulsOneService {
         return members;
     }
 
-    public List<Member> findAllByFetchJoin() {
+    // N + 1 해결 - Fetch join
+    public void findAllByFetchJoin() {
         List<Member> members = memberRepository.finAllByFetchJoin();
 
         printTeamNameOfMember(members);
+    }
 
-        return members;
+    // N + 1 해결 - EntityGraph
+    public void findAllByEntityGraph() {
+        List<Member> members = memberRepository.findAllEntityGraph();
+
+        printTeamNameOfMember(members);
     }
 
     private void printTeamNameOfMember(List<Member> members) {
         members.forEach(member -> System.out.println(member.getTeam().getName()));
+    }
+
+    private void checkExistMember(Long memberId, Optional<Member> optionalMember) {
+        if (optionalMember.isEmpty()) {
+            throw new IllegalArgumentException(String.format("Member with id %d does not exist", memberId));
+        }
     }
 
 }

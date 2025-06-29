@@ -12,7 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 @SpringBootTest
-record NpulsOneServiceTest(NpulsOneService npulsOneService, MemberRepository memberRepository, TeamRepository teamRepository, EntityManager entityManager) {
+record NpulsOneServiceTest(NpulsOneService npulsOneService, MemberRepository memberRepository, TeamRepository teamRepository,
+                           EntityManager entityManager) {
 
     @DisplayName("멤버 생성")
     @Test
@@ -67,7 +68,7 @@ record NpulsOneServiceTest(NpulsOneService npulsOneService, MemberRepository mem
         entityManager.flush();
         entityManager.clear();
 
-        List<Member> allMember = npulsOneService.findAllMember();
+        npulsOneService.findAllMember();
 
     }
 
@@ -79,9 +80,22 @@ record NpulsOneServiceTest(NpulsOneService npulsOneService, MemberRepository mem
         entityManager.flush();
         entityManager.clear();
 
-        List<Member> allMember = npulsOneService.findAllByFetchJoin();
+        npulsOneService.findAllByFetchJoin();
 
     }
+
+    @DisplayName("N+1 해결 by EntityGraph")
+    @Test
+    void findAllByEntityGraph() {
+        extracted();
+
+        entityManager.flush();
+        entityManager.clear();
+
+        npulsOneService.findAllByEntityGraph();
+
+    }
+
 
     private void extracted() {
         Member m1 = npulsOneService.createMember("1");

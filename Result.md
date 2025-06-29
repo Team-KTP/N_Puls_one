@@ -12,3 +12,6 @@
 ## N + 1 해결
 ### Fetch Join - `findAllByFetchJoin()`
 <img src="src/main/resources/static/fetchjoin.png">
+
+### EntityGraph - `findAllByEntityGraph()`
+<img src="src/main/resources/static/entitygraph.png">

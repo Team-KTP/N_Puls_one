@@ -58,12 +58,16 @@ SELECT * FROM comment WHERE post_id = 3;
       - JPQL 에서 지원 X
     - 
 2. ### **_@EntityGraph_**
-    - Spring Data JPA에서 제공하는 기능으로, JPQL로 fetch join을 직접 작성하지 않고 fetch join을 어노테이션을 사용하여 편리하게 사용할 수 있도록 해준다.
+    - Spring Data JPA에서 제공하는 기능으로, JPQL로 fetch join을 직접 작성하지 않고 **@EntityGraph**을 사용하여 편리하게 사용할 수 있도록 해준다.
     - @EntityGraph는 **left outer join** 만 지원함.
     - 런타임에 fetchType.LAZY를 fetchType.EAGER로 전환하여 데이터를 가져온다
-4. Batch Size
+3. Batch Size
     - IN 쿼리로 묶어서 쿼리 수를 줄임
 4. 일반 join후 Projection하여 특정 컬럼만 Dto로 조회
 
-fetch join과 EntityGraph는 공통적으로 카테시안 곱(Cartesian Product)이 발생 하여 중복이 생길 수 있다.
-※ 카테시안 곱 : 두 테이블 사이에 유효 join 조건을 적지 않았을 때 해당 테이블에 대한 모든 데이터를 전부 결합하여 테이블에 존재하는 행 갯수를 곱한만큼의 결과 값이 반환되는 것
+### fetch join과 EntityGraph는 공통적으로 카테시안 곱(Cartesian Product)이 발생 하여 중복이 생길 수 있다.
+- 카테시안 곱 : 두 테이블 사이에 유효 join 조건을 적지 않았을 때 해당 테이블에 대한 모든 데이터를 전부 결합하여 테이블에 존재하는 행 갯수를 곱한만큼의 결과 값이 반환되는 것
+- 해결 방안 (@Query에 적용하면 됨.)
+  1. 일대다 필드의 타입을 `Set` 으로 선언
+  2. `distinct`를 사용하여 중복 제거 
+  
