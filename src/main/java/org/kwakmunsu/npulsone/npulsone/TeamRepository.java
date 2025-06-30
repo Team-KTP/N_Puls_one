@@ -1,4 +1,4 @@
-package org.kwakmunsu.npulsone;
+package org.kwakmunsu.npulsone.npulsone;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

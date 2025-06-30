@@ -1,4 +1,4 @@
-package org.kwakmunsu.npulsone;
+package org.kwakmunsu.npulsone.npulsone;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
