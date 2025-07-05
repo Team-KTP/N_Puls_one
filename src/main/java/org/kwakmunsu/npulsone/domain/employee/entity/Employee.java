@@ -9,7 +9,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -28,9 +27,6 @@ public class Employee {
     private String name;
 
     @Column(nullable = false)
-    private BigDecimal salary;
-
-    @Column(nullable = false)
     @Enumerated(value = EnumType.STRING)
     private Position position;
 
@@ -38,17 +34,17 @@ public class Employee {
     @Enumerated(value = EnumType.STRING)
     private Department department;
 
-    private LocalDateTime hireDate;
+    @Column(name = "hire_at")
+    private LocalDateTime hireAt;
 
-    public static Employee join(String name, Position position, BigDecimal salary, Department department) {
+    public static Employee join(EmployeeJoinRequest request) {
         Employee employee = new Employee();
 
-        employee.name = requireNonNull(name);
-        employee.position = requireNonNull(position);
-        employee.salary = requireNonNull(salary);
-        employee.department = requireNonNull(department);
+        employee.name = requireNonNull(request.name());
+        employee.position = requireNonNull(request.position());
+        employee.department = requireNonNull(request.department());
 
-        employee.hireDate = LocalDateTime.now();
+        employee.hireAt = LocalDateTime.now();
 
         return employee;
     }
@@ -63,11 +59,6 @@ public class Employee {
 
     public void changePosition(Position position) {
         this.position = position;
-    }
-
-    public void  changeSalary(BigDecimal salary) {
-        this.salary = salary;
-
     }
 
 }

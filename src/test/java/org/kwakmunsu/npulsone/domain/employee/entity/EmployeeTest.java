@@ -2,7 +2,6 @@ package org.kwakmunsu.npulsone.domain.employee.entity;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.math.BigDecimal;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,7 @@ class EmployeeTest {
 
     @BeforeEach
     void setUp() {
-        employee = Employee.join("kwak", Position.INTERN, BigDecimal.valueOf(2500000L), Department.BACKEND);
+        employee = EmployeeFixture.createEmployee();
     }
 
 
@@ -53,14 +52,5 @@ class EmployeeTest {
         assertThat(employee.getPosition()).isEqualTo(Position.ASSISTANT);
     }
 
-    @DisplayName("월급이 변경된다")
-    @Test
-    void changeSalary() {
-        assertThat(employee.getSalary()).isEqualTo(BigDecimal.valueOf(2500000L));
-
-        employee.changeSalary(BigDecimal.valueOf(3_000_000L));
-
-        assertThat(employee.getSalary()).isEqualTo(BigDecimal.valueOf(3_000_000L));
-    }
 
 }
